@@ -1,0 +1,103 @@
+services:
+  redis-exporter:
+    image: oliver006/redis_exporter
+    container_name: adtech-redis-exporter
+    ports:
+      - "9121:9121"
+    environment:
+      - REDIS_ADDR=redis://redis:6379
+    depends_on:
+      - redis
+
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: adtech-postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      DATA_SOURCE_NAME: "postgresql://adtech:adtech123@postgres:5432/adtech?sslmode=disable"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16
+    container_name: adtech-postgres
+    environment:
+      POSTGRES_DB: adtech
+      POSTGRES_USER: adtech
+      POSTGRES_PASSWORD: adtech123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adtech -d adtech"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: adtech-redis
+    ports:
+      - "6379:6379"
+
+  rtb-auction-service:
+    build: .
+    container_name: rtb-auction-service
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/adtech
+      SPRING_DATASOURCE_USERNAME: adtech
+      SPRING_DATASOURCE_PASSWORD: adtech123
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+
+  api-gateway:
+    image: nginx:latest
+    container_name: adtech-api-gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - rtb-auction-service
+
+  prometheus:
+    image: prom/prometheus
+    container_name: adtech-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    depends_on:
+      - rtb-auction-service
+
+  grafana:
+    image: grafana/grafana
+    container_name: adtech-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  postgres-data:
+  prometheus-data:
+  grafana-data:
+
+
+
+
+
