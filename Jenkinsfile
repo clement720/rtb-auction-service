@@ -3,8 +3,8 @@ pipeline {
 
     environment {
 
-DEPLOY_DIR = "/home/ec2-user/rtb-auction-service"
-BACKUP_DIR = "/home/ec2-user/rtb-auction-service-backup"
+DEPLOY_DIR = "/opt/adtech/rtb-auction-service"
+BACKUP_DIR = "/opt/adtech/rtb-auction-service-backup"
         HEALTH_URL = "http://localhost/health"
     }
 
