@@ -24,6 +24,19 @@ BACKUP_DIR = "/opt/adtech/rtb-auction-service-backup"
             }
         }
 
+
+stage('SonarQube Scan') {
+    steps {
+        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+            sh '''
+            ./gradlew sonar \
+              -Dsonar.host.url=http://localhost:9000 \
+              -Dsonar.token=$SONAR_TOKEN
+            '''
+        }
+    }
+}
+
         stage('Backup Current Deployment') {
             steps {
                 sh '''
