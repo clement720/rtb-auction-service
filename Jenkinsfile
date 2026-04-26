@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME = "rtb-auction-service"
         DEPLOY_DIR = "/home/ec2-user/rtb-auction-service"
         BACKUP_DIR = "/home/ec2-user/rtb-auction-service-backup"
         HEALTH_URL = "http://localhost/health"
@@ -17,11 +16,14 @@ pipeline {
 
         stage('Build JAR') {
             steps {
-                sh './gradlew clean bootJar --no-daemon'
+                sh '''
+                chmod +x gradlew
+                ./gradlew clean bootJar --no-daemon
+                '''
             }
         }
 
-        stage('Pre Deploy Backup') {
+        stage('Backup Current Deployment') {
             steps {
                 sh '''
                 sudo rm -rf ${BACKUP_DIR}
@@ -35,14 +37,20 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                sudo rm -rf ${DEPLOY_DIR}
+                sudo mkdir -p ${DEPLOY_DIR}
+
                 sudo rsync -a --delete \
                   --exclude='.git' \
                   --exclude='.gradle' \
                   --exclude='build/tmp' \
                   ./ ${DEPLOY_DIR}/
 
+                sudo chown -R jenkins:jenkins ${DEPLOY_DIR}
+
                 cd ${DEPLOY_DIR}
-                docker-compose down
+
+                docker-compose down || true
                 docker-compose up -d --build
                 '''
             }
@@ -69,6 +77,7 @@ pipeline {
             if [ -d ${BACKUP_DIR} ]; then
               sudo rm -rf ${DEPLOY_DIR}
               sudo cp -r ${BACKUP_DIR} ${DEPLOY_DIR}
+              sudo chown -R jenkins:jenkins ${DEPLOY_DIR}
               cd ${DEPLOY_DIR}
               docker-compose up -d --build
             fi
