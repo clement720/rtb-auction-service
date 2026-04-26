@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DEPLOY_DIR = "/home/ec2-user/rtb-auction-service"
-        BACKUP_DIR = "/home/ec2-user/rtb-auction-service-backup"
+
+DEPLOY_DIR = "/home/ec2-user/rtb-auction-service"
+BACKUP_DIR = "/home/ec2-user/rtb-auction-service-backup"
         HEALTH_URL = "http://localhost/health"
     }
 
