@@ -11,27 +11,23 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/actuator/**", "/health", "/login", "/auction", "/", "/auction-test", "/campaigns").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(login -> login
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
-                .permitAll()
-            );
 
-        return http.build();
-    }
 
+
+
+@Bean
+SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/actuator/**", "/health", "/auction", "/", "/campaigns").permitAll()
+            .anyRequest().permitAll()
+        )
+        .formLogin(login -> login.disable())
+        .logout(logout -> logout.disable());
+
+    return http.build();
+}
     @Bean
     UserDetailsService users() {
         return new InMemoryUserDetailsManager(
