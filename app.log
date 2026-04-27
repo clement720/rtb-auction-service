@@ -690,3 +690,173 @@ Hibernate:
         c1_0.id desc 
     fetch
         first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.active,
+        c1_0.advertiser,
+        c1_0.daily_budget,
+        c1_0.max_bid,
+        c1_0.spent_today,
+        c1_0.target_content_type,
+        c1_0.target_country,
+        c1_0.target_device 
+    from
+        campaign c1_0 
+    order by
+        c1_0.id desc 
+    fetch
+        first ? rows only
